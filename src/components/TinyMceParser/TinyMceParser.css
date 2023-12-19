@@ -1,0 +1,39 @@
+.no-tailwind h1,
+.no-tailwind h2,
+.no-tailwind h3,
+.no-tailwind h4,
+.no-tailwind h5,
+.no-tailwind h6 {
+    font-size: revert;
+    font-weight: revert;
+}
+
+.no-tailwind ol,
+.no-tailwind ul {
+    list-style: revert;
+    margin: revert;
+    padding: revert;
+}
+
+.no-tailwind a {
+    color: revert;
+}
+
+.no-tailwind h1,
+.no-tailwind h2,
+.no-tailwind p{
+    margin: revert;
+}
+
+
+.no-tailwind td{
+    padding: 0.4rem;
+}
+
+
+/*.no-tailwind td,
+.no-tailwind td::before,
+.no-tailwind td::after{
+    
+}
+*/

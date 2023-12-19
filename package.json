@@ -22,7 +22,9 @@
     }
   },
   "dependencies": {
+    "@tinymce/tinymce-react": "^4.3.2",
     "@ws-ui/webform-editor": "^0.0.56",
+    "html-react-parser": "^5.0.10",
     "react": "^17.0.2",
     "react-dom": "^17.0.2"
   },
