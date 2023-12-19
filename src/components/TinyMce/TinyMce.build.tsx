@@ -45,7 +45,6 @@ const TinyMce: FC<ITinyMceProps> = ({ apiKey, style, className, classNames = [] 
             ],
             toolbar:
               'undo redo | blocks | bold italic underline strikethrough | fontfamily fontsize | alignleft aligncenter alignright alignjustify | outdent indent |  numlist bullist | forecolor backcolor removeformat  | charmap emoticons | fullscreen  preview save print | image media template link codesample | ltr rtl',
-            content_style: 'body { font-family:Helvetica,Arial,sans-serif; font-size:14px }',
           }}
         />
       ) : (
