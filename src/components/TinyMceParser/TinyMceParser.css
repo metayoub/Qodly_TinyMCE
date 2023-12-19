@@ -1,3 +1,7 @@
+.no-tailwind {
+    all: revert;
+}
+
 .no-tailwind h1,
 .no-tailwind h2,
 .no-tailwind h3,
@@ -25,15 +29,68 @@
     margin: revert;
 }
 
-
 .no-tailwind td{
     padding: 0.4rem;
 }
 
-
-/*.no-tailwind td,
-.no-tailwind td::before,
-.no-tailwind td::after{
-    
+.no-tailwind blockquote,
+.no-tailwind figure {
+	margin: 1em 40px;
 }
-*/
+
+
+.no-tailwind table {
+    border-collapse: collapse
+}
+
+.no-tailwind table:not([cellpadding]) td,table:not([cellpadding]) th {
+    padding: .4rem
+}
+
+.no-tailwind table[border]:not([border="0"]):not([style*=border-width]) td,table[border]:not([border="0"]):not([style*=border-width]) th {
+    border-width: 1px
+}
+
+.no-tailwind table[border]:not([border="0"]):not([style*=border-style]) td,table[border]:not([border="0"]):not([style*=border-style]) th {
+    border-style: solid
+}
+
+.no-tailwind table[border]:not([border="0"]):not([style*=border-color]) td,table[border]:not([border="0"]):not([style*=border-color]) th {
+    border-color: #ccc
+}
+
+.no-tailwind figure {
+    display: table;
+    margin: 1rem auto
+}
+
+.no-tailwind figure figcaption {
+    color: #999;
+    display: block;
+    margin-top: .25rem;
+    text-align: center
+}
+
+.no-tailwind hr {
+    border-color: #ccc;
+    border-style: solid;
+    border-width: 1px 0 0 0
+}
+
+.no-tailwind code {
+    background-color: #e8e8e8;
+    border-radius: 3px;
+    padding: .1rem .2rem
+}
+
+.no-tailwind:not([dir=rtl]) blockquote {
+    border-left: 2px solid #ccc;
+    margin-left: 1.5rem;
+    padding-left: 1rem
+}
+
+.no-tailwind[dir=rtl] blockquote {
+    border-right: 2px solid #ccc;
+    margin-right: 1.5rem;
+    padding-right: 1rem
+}
