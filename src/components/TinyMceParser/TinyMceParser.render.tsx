@@ -31,7 +31,7 @@ const TinyMceParser: FC<ITinyMceParserProps> = ({ style, className, classNames =
   }, [ds]);
 
   return (
-    <span ref={connect} style={style} className={cn(className, classNames)}>
+    <span ref={connect} style={style} className={cn('no-tailwind', className, classNames)}>
       {parse(value)}
     </span>
   );
