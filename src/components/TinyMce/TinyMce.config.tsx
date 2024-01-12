@@ -56,12 +56,23 @@ export default {
   },
   defaultProps: {
     apiKey: '',
-    style: {
-      height: '400px',
-    },
+    toolbarLocation: 'top',
+    resize: false, // make it dynamic
+    menubar: false, // make it dynamic
+    inline: false, // make it dynamic
+    readonly: false,
+    browserSpellcheck: false,
+    statusbar: false,
   },
 } as T4DComponentConfig<ITinyMceProps>;
 
 export interface ITinyMceProps extends webforms.ComponentProps {
   apiKey?: string;
+  toolbarLocation: 'top' | 'bottom' | 'auto';
+  resize: boolean;
+  menubar: boolean;
+  inline: boolean;
+  readonly: boolean;
+  browserSpellcheck: boolean;
+  statusbar: boolean;
 }
