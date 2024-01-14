@@ -59,6 +59,24 @@ const commonSettings: TSetting[] = [
     type: ESetting.CHECKBOX,
     defaultValue: false,
   },
+  {
+    key: 'liteVersion',
+    label: 'Lite Version',
+    type: ESetting.CHECKBOX,
+    defaultValue: false,
+  },
+  {
+    key: 'dark',
+    label: 'Dark Mode',
+    type: ESetting.CHECKBOX,
+    defaultValue: false,
+  },
+  {
+    key: 'button',
+    label: 'add Button',
+    type: ESetting.CHECKBOX,
+    defaultValue: false,
+  },
 ];
 
 const Settings: TSetting[] = [

@@ -16,6 +16,9 @@ const TinyMce: FC<ITinyMceProps> = ({
   readonly,
   browserSpellcheck,
   statusbar,
+  dark,
+  button,
+  liteVersion,
   className,
   classNames = [],
 }) => {
@@ -26,6 +29,8 @@ const TinyMce: FC<ITinyMceProps> = ({
   const init = {
     toolbar_location: toolbarLocation,
     // height: '100%',
+    skin: dark ? 'oxide-dark' : 'oxide',
+    content_css: dark ? 'dark' : '',
     max_height: 200, // make it dynamic
     width: '100%',
     resize: resize,
@@ -56,20 +61,21 @@ const TinyMce: FC<ITinyMceProps> = ({
       'emoticons',
     ],
     setup: function (editor: any) {
-      editor.ui.registry.addButton('mySendButton', {
-        tooltip: 'Send Message',
-        text: 'Send',
-        onAction: function () {
-          // bind it to an action
-          alert(editor.getContent());
-          editor.resetContent();
-        },
-      });
+      button &&
+        editor.ui.registry.addButton('mySendButton', {
+          tooltip: 'Send Message',
+          text: 'Send',
+          onAction: function () {
+            // bind it to an action
+            alert(editor.getContent());
+            editor.resetContent();
+          },
+        });
     },
-    //toolbar:
-    // 'undo redo | blocks | bold italic underline strikethrough | fontfamily fontsize | alignleft aligncenter alignright alignjustify | outdent indent |  numlist bullist | forecolor backcolor removeformat  | charmap emoticons | fullscreen  preview save print | image media template link codesample | ltr rtl',
-    toolbar:
-      'bold italic strikethrough link numlist bullist blockquote emoticons image | mySendButton', // Customize last message
+    // content_style: 'body { font-family:Helvetica,Arial,sans-serif; font-size:14px }',
+    toolbar: liteVersion
+      ? 'bold italic strikethrough link numlist bullist blockquote emoticons image | mySendButton'
+      : 'undo redo | blocks | bold italic underline strikethrough | fontfamily fontsize | alignleft aligncenter alignright alignjustify | outdent indent |  numlist bullist | forecolor backcolor removeformat  | charmap emoticons | fullscreen  preview save print | image media template link codesample | ltr rtl', // Customize last message
   };
 
   // rendering when changing
@@ -77,11 +83,23 @@ const TinyMce: FC<ITinyMceProps> = ({
   useEffect(() => {
     // Increment the key to remount the component
     setKey((prevKey) => prevKey + 1);
-  }, [toolbarLocation, resize, readonly, menubar, inline, browserSpellcheck, statusbar]);
+  }, [
+    toolbarLocation,
+    resize,
+    readonly,
+    menubar,
+    inline,
+    browserSpellcheck,
+    statusbar,
+    style,
+    dark,
+    liteVersion,
+    button,
+  ]);
 
   const editorRef = useRef<TinyMCEEditor | null>(null);
   return (
-    <div ref={connect} style={style} className={cn(className, classNames)}>
+    <div ref={connect} className={cn(className, classNames)}>
       {apiKey && apiKey !== '' ? (
         <Editor
           disabled={readonly}
