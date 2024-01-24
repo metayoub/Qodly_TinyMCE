@@ -86,12 +86,34 @@ const Settings: TSetting[] = [
     type: ESetting.GROUP,
     components: commonSettings,
   },
-  ...DEFAULT_SETTINGS,
+  ...load(DEFAULT_SETTINGS).filter(
+    'appearance',
+    'style.overflow',
+    'color',
+    'background',
+    'font',
+    'borders',
+    'borderRadius',
+  ),
 ];
+
+console.log('BASIC_SETTINGS: ', BASIC_SETTINGS);
 
 export const BasicSettings: TSetting[] = [
   ...commonSettings,
-  ...load(BASIC_SETTINGS).filter('style.overflow'),
+  ...load(BASIC_SETTINGS).filter(
+    'style.color',
+    'style.backgroundColor',
+    'style.overflow',
+    'style.fontFamily',
+    'style.fontWeight',
+    'style.fontSize',
+    'style.textAlign',
+    'style.textTransform',
+    'border',
+    'borderRadius',
+    'display',
+  ),
 ];
 
 export default Settings;
