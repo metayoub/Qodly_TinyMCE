@@ -56,6 +56,10 @@ export default {
   },
   defaultProps: {
     apiKey: 'at2lmgrpwi9vbfl4jmmg19hltju52xjp0sx0zenblpipfa5t',
+    style: {
+      height: '200px',
+      width: '100%',
+    },
     toolbarLocation: 'top',
     resize: false,
     menubar: false,
