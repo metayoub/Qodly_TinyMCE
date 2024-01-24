@@ -66,11 +66,10 @@ const Tinymce: FC<ITinyMceProps> = ({
 
   const init = {
     toolbar_location: toolbarLocation,
-    // height: '100%',
     skin: dark ? 'oxide-dark' : 'oxide',
     content_css: dark ? 'dark' : '',
-    max_height: 200, // make it dynamic
-    width: '100%',
+    height: style?.height || '100%',
+    width: style?.width || '100%',
     resize: resize,
     menubar: menubar,
     inline: inline,
@@ -79,7 +78,6 @@ const Tinymce: FC<ITinyMceProps> = ({
     statusbar: statusbar,
     autoresize_bottom_margin: 0, // make it dynamic
     plugins: [
-      'autoresize',
       'advlist',
       'autolink',
       'lists',
@@ -97,6 +95,7 @@ const Tinymce: FC<ITinyMceProps> = ({
       'table',
       'code',
       'emoticons',
+      resize ? 'autoresize' : '',
     ],
     setup: function (editor: any) {
       button &&
