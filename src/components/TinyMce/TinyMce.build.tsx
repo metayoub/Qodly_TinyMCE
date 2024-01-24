@@ -28,11 +28,10 @@ const TinyMce: FC<ITinyMceProps> = ({
 
   const init = {
     toolbar_location: toolbarLocation,
-    // height: '100%',
+    height: style?.height || '100%',
     skin: dark ? 'oxide-dark' : 'oxide',
     content_css: dark ? 'dark' : '',
-    max_height: 200, // make it dynamic
-    width: '100%',
+    width: style?.width || '100%',
     resize: resize,
     menubar: menubar,
     inline: inline,
@@ -41,7 +40,6 @@ const TinyMce: FC<ITinyMceProps> = ({
     statusbar: statusbar,
     autoresize_bottom_margin: 0, // make it dynamic
     plugins: [
-      'autoresize',
       'advlist',
       'autolink',
       'lists',
@@ -59,6 +57,7 @@ const TinyMce: FC<ITinyMceProps> = ({
       'table',
       'code',
       'emoticons',
+      resize ? 'autoresize' : '',
     ],
     setup: function (editor: any) {
       button &&
@@ -99,7 +98,7 @@ const TinyMce: FC<ITinyMceProps> = ({
 
   const editorRef = useRef<TinyMCEEditor | null>(null);
   return (
-    <div ref={connect} className={cn(className, classNames)}>
+    <div ref={connect} style={style} className={cn(className, classNames)}>
       {apiKey && apiKey !== '' ? (
         <Editor
           disabled={readonly}
