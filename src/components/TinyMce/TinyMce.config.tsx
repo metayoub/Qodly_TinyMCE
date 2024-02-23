@@ -55,7 +55,7 @@ export default {
     },
   },
   defaultProps: {
-    apiKey: 'at2lmgrpwi9vbfl4jmmg19hltju52xjp0sx0zenblpipfa5t',
+    apiKey: '',
     style: {
       height: '200px',
       width: '100%',
@@ -74,7 +74,7 @@ export default {
 } as T4DComponentConfig<ITinyMceProps>;
 
 export interface ITinyMceProps extends webforms.ComponentProps {
-  apiKey?: string;
+  apiKey: string;
   toolbarLocation: 'top' | 'bottom' | 'auto';
   resize: boolean;
   menubar: boolean;

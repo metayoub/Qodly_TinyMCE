@@ -5,6 +5,7 @@ import { ITinyMceProps } from './TinyMce.config';
 import { Editor } from '@tinymce/tinymce-react';
 import { Editor as TinyMCEEditor } from 'tinymce';
 import { useRef, useState } from 'react';
+import { CgDanger } from 'react-icons/cg';
 import { debounce } from 'lodash';
 
 const Tinymce: FC<ITinyMceProps> = ({
@@ -31,7 +32,8 @@ const Tinymce: FC<ITinyMceProps> = ({
     sources: { datasource: ds },
   } = useSources();
 
-  const [value, setValue] = useState(() => ds.initialValue || '');
+  const [value, setValue] = useState(() => ds?.initialValue || '');
+  console.log(value);
 
   useEffect(() => {
     if (!ds) return;
@@ -117,7 +119,7 @@ const Tinymce: FC<ITinyMceProps> = ({
 
   return (
     <div ref={connect} style={style} className={cn(className, classNames)}>
-      {apiKey && apiKey !== '' && (
+      {apiKey && apiKey !== '' && ds?.initialValue !== undefined ? (
         <Editor
           apiKey={apiKey}
           onInit={(_evt, editor) => (editorRef.current = editor)}
@@ -129,6 +131,12 @@ const Tinymce: FC<ITinyMceProps> = ({
           init={init}
           disabled={readonly}
         />
+      ) : (
+        <div className="flex h-full flex-col items-center justify-center rounded-lg border bg-purple-400 py-4 text-white">
+          <CgDanger className="mb-1 h-8 w-8" />
+          <p>{!apiKey && 'Missing the APIKey'}</p>
+          <p>{!value && 'Missing a datasource'}</p>
+        </div>
       )}
     </div>
   );

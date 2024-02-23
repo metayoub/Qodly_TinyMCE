@@ -97,8 +97,6 @@ const Settings: TSetting[] = [
   ),
 ];
 
-console.log('BASIC_SETTINGS: ', BASIC_SETTINGS);
-
 export const BasicSettings: TSetting[] = [
   ...commonSettings,
   ...load(BASIC_SETTINGS).filter(
