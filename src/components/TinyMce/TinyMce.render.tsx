@@ -7,7 +7,22 @@ import { Editor as TinyMCEEditor } from 'tinymce';
 import { useRef, useState } from 'react';
 import { debounce } from 'lodash';
 
-const Tinymce: FC<ITinyMceProps> = ({ apiKey, style, className, classNames = [] }) => {
+const Tinymce: FC<ITinyMceProps> = ({
+  apiKey,
+  toolbarLocation,
+  style,
+  resize,
+  menubar,
+  inline,
+  readonly,
+  browserSpellcheck,
+  statusbar,
+  dark,
+  button,
+  liteVersion,
+  className,
+  classNames = [],
+}) => {
   const { connect, emit } = useRenderer({
     omittedEvents: ['onchange'],
   });
@@ -49,6 +64,57 @@ const Tinymce: FC<ITinyMceProps> = ({ apiKey, style, className, classNames = [] 
     debouncedEmit('onchange');
   };
 
+  const init = {
+    toolbar_location: toolbarLocation,
+    skin: dark ? 'oxide-dark' : 'oxide',
+    content_css: dark ? 'dark' : '',
+    height: style?.height || '100%',
+    width: style?.width || '100%',
+    resize: resize,
+    menubar: menubar,
+    inline: inline,
+    readonly: readonly,
+    browser_spellcheck: browserSpellcheck,
+    statusbar: statusbar,
+    autoresize_bottom_margin: 0, // make it dynamic
+    plugins: [
+      'advlist',
+      'autolink',
+      'lists',
+      'link',
+      'image',
+      'charmap',
+      'preview',
+      'anchor',
+      'searchreplace',
+      'visualblocks',
+      'code',
+      'fullscreen',
+      'insertdatetime',
+      'media',
+      'table',
+      'code',
+      'emoticons',
+      resize ? 'autoresize' : '',
+    ],
+    setup: function (editor: any) {
+      button &&
+        editor.ui.registry.addButton('mySendButton', {
+          tooltip: 'Send Message',
+          text: 'Send',
+          onAction: function () {
+            // bind it to an action
+            alert(editor.getContent());
+            editor.resetContent();
+          },
+        });
+    },
+    // content_style: 'body { font-family:Helvetica,Arial,sans-serif; font-size:14px }',
+    toolbar: liteVersion
+      ? 'bold italic strikethrough link numlist bullist blockquote emoticons image | mySendButton'
+      : 'undo redo | blocks | bold italic underline strikethrough | fontfamily fontsize | alignleft aligncenter alignright alignjustify | outdent indent |  numlist bullist | forecolor backcolor removeformat  | charmap emoticons | fullscreen  preview save print | image media template link codesample | ltr rtl', // Customize last message
+  };
+
   return (
     <div ref={connect} style={style} className={cn(className, classNames)}>
       {apiKey && apiKey !== '' && (
@@ -60,50 +126,8 @@ const Tinymce: FC<ITinyMceProps> = ({ apiKey, style, className, classNames = [] 
           onEditorChange={() => {
             handleChange(editorRef!.current!.getContent());
           }}
-          init={{
-            height: '100%',
-            width: '100%',
-            resize: false,
-            menubar: false,
-            plugins: [
-              'print',
-              'paste',
-              'advlist',
-              'importcss',
-              'directionality',
-              'autolink',
-              'lists',
-              'link',
-              'noneditable',
-              'textpattern',
-              'quickbars',
-              'emoticons',
-              'toc',
-              'image',
-              'imagetools',
-              'charmap',
-              'preview',
-              'anchor',
-              'hr',
-              'pagebreak',
-              'nonbreaking',
-              'searchreplace',
-              'visualblocks',
-              'visualchars',
-              'code',
-              'codesample',
-              'fullscreen',
-              'insertdatetime',
-              'media',
-              'template',
-              'table',
-              'help',
-              'wordcount',
-            ],
-            toolbar:
-              'undo redo | blocks | bold italic underline strikethrough | fontfamily fontsize | alignleft aligncenter alignright alignjustify | outdent indent |  numlist bullist | forecolor backcolor removeformat  | charmap emoticons | fullscreen  preview save print | image media template link codesample | ltr rtl',
-            content_style: 'body { font-family:Helvetica,Arial,sans-serif; font-size:14px }',
-          }}
+          init={init}
+          disabled={readonly}
         />
       )}
     </div>
