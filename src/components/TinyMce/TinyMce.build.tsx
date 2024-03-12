@@ -18,6 +18,7 @@ const TinyMce: FC<ITinyMceProps> = ({
   statusbar,
   dark,
   button,
+  datasource,
   liteVersion,
   className,
   classNames = [],
@@ -99,7 +100,7 @@ const TinyMce: FC<ITinyMceProps> = ({
   const editorRef = useRef<TinyMCEEditor | null>(null);
   return (
     <div ref={connect} style={style} className={cn(className, classNames)}>
-      {apiKey && apiKey !== '' ? (
+      {apiKey && apiKey !== '' && datasource ? (
         <Editor
           disabled={readonly}
           apiKey={apiKey}
@@ -109,7 +110,10 @@ const TinyMce: FC<ITinyMceProps> = ({
           key={key}
         />
       ) : (
-        <div>Please set you API Key !!!</div>
+        <div>
+          <p>{!apiKey && 'Please set you API Key !!!'}</p>
+          <p>{!datasource && 'Missing DataSource !!!'}</p>
+        </div>
       )}
     </div>
   );
