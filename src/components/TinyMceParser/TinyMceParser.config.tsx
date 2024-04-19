@@ -55,7 +55,9 @@ export default {
       accept: ['string'],
     },
   },
-  defaultProps: {},
+  defaultProps: {
+    iterableChild: true,
+  },
 } as T4DComponentConfig<ITinyMceParserProps>;
 
 export interface ITinyMceParserProps extends webforms.ComponentProps {}
