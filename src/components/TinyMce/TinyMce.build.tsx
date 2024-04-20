@@ -36,7 +36,7 @@ const TinyMce: FC<ITinyMceProps> = ({
     resize: resize,
     menubar: menubar,
     inline: inline,
-    readonly: readonly,
+    disabled: true,
     browser_spellcheck: browserSpellcheck,
     statusbar: statusbar,
     autoresize_bottom_margin: 0, // make it dynamic
@@ -102,7 +102,7 @@ const TinyMce: FC<ITinyMceProps> = ({
     <div ref={connect} style={style} className={cn(className, classNames)}>
       {apiKey && apiKey !== '' && datasource ? (
         <Editor
-          disabled={readonly}
+          disabled={true}
           apiKey={apiKey}
           onInit={(_evt, editor) => (editorRef.current = editor)}
           initialValue="<p><em>Hello</em>, <span style='text-decoration: underline;'><strong>World!</strong></span></p>" // make it dynamic as a place holder

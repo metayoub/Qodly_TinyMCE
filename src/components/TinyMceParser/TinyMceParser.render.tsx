@@ -17,7 +17,7 @@ const TinyMceParser: FC<ITinyMceParserProps> = ({ style, className, classNames =
 
     const listener = async (/* event */) => {
       const v = await ds.getValue<string>();
-      setValue(v);
+      setValue(v || '');
     };
 
     listener();
