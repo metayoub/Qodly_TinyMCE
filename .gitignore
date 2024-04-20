@@ -28,3 +28,7 @@ qodly_*.zip
 *.njsproj
 *.sln
 *.sw?
+
+# Env File
+.env
+.env.*
